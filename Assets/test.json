@@ -1,0 +1,5 @@
+{
+  "$type": "SubalternGames.Json.TestObject, Assembly-CSharp",
+  "name": "abcd",
+  "hp": 1
+}
