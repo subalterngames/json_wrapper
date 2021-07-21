@@ -4,6 +4,8 @@ This project includes a convenient wrapper class for Newtonsoft JSON in Unity3D.
 
 Newtonsoft JSON is my preferred means of handling JSON in Unity. However, setting it up is not straightforward or well documented. I always forget how to do it! So I created this repo, which includes installation instructions and a helpful wrapper class: `JsonWrapper`. 
 
+*Note:* Newtonsoft JSON is quite powerful and flexible. The `JsonWrapper` implementation is the "one size fits all" version that I typically use for save files in my own projects. This class might not be sufficient for more complex tasks.
+
 ## Example usage
 
 ```c#
