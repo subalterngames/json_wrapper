@@ -1,55 +1,29 @@
 # JSON Unity Wrapper
 
+This project includes a convenient wrapper class for Newtonsoft JSON in Unity3D.
+
+Newtonsoft JSON is my preferred means of handling JSON in Unity. However, setting it up is not straightforward or well documented. I always forget how to do it! So I created this repo, which includes installation instructions and a helpful wrapper class: `JsonWrapper`. 
+
 ## Example usage
 
 ```c#
-namespace SubalternGames.Json
+using SubalternGames;
+
+
+public class TestObject
 {
-    public class TestObject
+    public int hp;
+
+
+    public TestObject(int hp)
     {
-        public string name;
-        public int hp;
-
-
-        public TestObject(string name, int hp)
-        {
-            this.name = name;
-            this.hp = hp;
-        }
+        this.hp = hp;
     }
-}
-```
-
-```c#
-using UnityEngine;
-using System.IO;
-using UnityEditor;
 
 
-namespace SubalternGames.Json
-{
-    /// <summary>
-    /// Tests for the JSON wrapper. Remember to put this script in an Editor/ folder.
-    /// </summary>
-    public static class JsonTest
+    public void Serialize(string path)
     {
-        [MenuItem("Subaltern Games/JSON Test")]
-        public static void Serialize()
-        {
-            TestObject a = new TestObject("abcd", 1);
-            string path = Path.Combine(Application.dataPath, "test.json");
-            
-            // Serialize the object to a file path.
-            JsonWrapper.Serialize(a, path);
-            Debug.Log(File.ReadAllText(path));
-            
-            // Deserialize the object from the file path.
-            TestObject b = JsonWrapper.DeserializeFromPath<TestObject>(path);
-            
-            // Assert that the object deserialized correctly.
-            Debug.Assert(b.name == "abcd");
-            Debug.Assert(b.hp == 1);
-        }
+        JsonWrapper.Serialize(this, path);
     }
 }
 ```
@@ -70,11 +44,13 @@ namespace SubalternGames.Json
 
 ![](doc/images/2_net_4.png)
 
-### Step 2: Copy [this folder] to the `Assets/` directory of your Unity project
+### Step 2: Copy [this file](https://github.com/subalterngames/json_wrapper/raw/main/Assets/Plugins/JSON/Newtonsoft.Json.dll) to `Assets/Plugins/JSON/` in your Unity project
 
-Make sure that the filepath is: `Assets/Plugins/JSON/Newtonsoft.Json.dll`
+Make sure that the filepath is: `Assets/Plugins/JSON/Newtonsoft.Json.dll`.
 
-### Step 3: Copy [this script] to the `Assets/` directory of your Unity project
+In some cases, Unity will log errors in the console about namespace clashes. If you see these errors, you already have Newtonsoft JSON installed as a Unity package; remove `Newtownsoft.Json.dll` from your project.
+
+### Step 3: Copy [this script](https://raw.githubusercontent.com/subalterngames/json_wrapper/main/Assets/Scripts/JsonWrapper.cs) to the `Assets/` directory of your Unity project
 
 The script can be copied anywhere in Assets. For the sake of organizing your project, consider: `Assets/Scripts/SubalternGames/JsonWrapper.cs`
 
